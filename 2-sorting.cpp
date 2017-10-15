@@ -15,8 +15,15 @@ class sort{
 		void initialize(void){
 			cout<<"";
 			for(int i = 0; i < size; i++){
-				cout<<"\tEnter element at "<<i+1;
+				cout<<"\tEnter element at position "<<i+1<<":\t";
 				cin>>list[i];
+			}
+		}
+		
+		void show(void){
+			cout<<"\nList is:";
+			for(int i = 0; i < size; i++){
+				cout<<"\t"<<list[i];
 			}
 		}
 };
@@ -26,6 +33,8 @@ int main(void){
 	cout<<"Enter size of list: ";
 	cin>>temp;
 	sort<int> array(temp);
+	array.initialize();
+	array.show();
 	
 	return 0;
 }
