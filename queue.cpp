@@ -25,23 +25,23 @@ void create(queue &q, int siz){
 
 void queue::enqueue(int element){
 	if(!isFull()){
-		if(rear == size -1 || rear == -1){
+		if(rear == size -1 || rear == -1){	//for very first entry in queue
 			arr[0] = element;
-			rear=0;
-			if (front == -1){
+			rear=0;	//	intialinzing rear to 0
+			if (front == -1){	//initialinzg front to 0
 				front = 0;
 			}
 		}
 		else
-			arr[++rear] = element;
+			arr[++rear] = element;	//for rest of the entries	first increment rear then add
 	}
 	else
 		cout<<"\nQueue Full.";
 }
 
 int queue::dequeue(void){
-	int tem=arr[front];
-	if(front == rear){
+	int tem=arr[front];		//sampling first entry of queue from front
+	if(front == rear){	//empty queue?
 		rear= front= -1;
 	}
 	else if (front == size -1){
