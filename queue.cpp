@@ -50,16 +50,6 @@ int main(void){
 	cout<<"Enter size of queue: ";
 	cin>>s;
 	create(q,s);
-	/*for(int i=0;i<s;i++){
-		cout<<"Enter "<<i+1<<" element in queue: ";
-		cin>>t;
-		q.enqueue(t);
-	}*/
-	
-	/*cout<<"\nEntered Queue is: ";
-	for(int i=0;i<s;i++){
-		cout<<q.arr[i]<<"\t";
-	}*/
 	
 	do{
 		cout<<"\nPress:\n1)\tFor Insertion of Element\n2)\tFor Deletion of Element\n3)\tFor printing queue:";
