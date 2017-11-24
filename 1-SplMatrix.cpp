@@ -80,7 +80,7 @@ class SpecialMatrix{
 				
 				case 4:		//Upper Triangle
 					if(i <= j)
-						arr[j * (j-1) / 2 + i - 1];
+						arr[j * (j-1) / 2 + i - 1] = x;
 					else if (x != 0)
 						MustBeZero();
 					break;
