@@ -34,10 +34,6 @@ class Stack{
 				T temp = arr[tos--];
 				return temp;
 			}
-			else{
-				cout<<"\nStack Underflow...";
-				return -1;
-			}
 		}
 		
 		void display(void){
