@@ -25,17 +25,13 @@ class Stack{
 		void push(T el){
 			if(!isFull()){
 				arr[++tos] = el;
-			}/*
-			else{
-				cout<<"\nStack Overflow...";
-			}*/
+			}
 			return;
 		}
 		
 		T pop(void){
 			if(!isEmpty()){
 				T temp = arr[tos--];
-				//cout<<temp<<" popped\n";
 				return temp;
 			}
 			else{
@@ -49,7 +45,6 @@ class Stack{
 				cout<<arr[i];
 			}
 		}
-		
 };
 
 int main(void){
@@ -62,14 +57,10 @@ int main(void){
 	int carry = 0;
 	for(int  i = 0; i < n1.length(); i++){
 		num1.push((int)n1[i] - 48);
-		//cout<<"\n\t"<<(int)n1[i] - 48;
 	}
 	for(int  i = 0; i < n2.length(); i++){
 		num2.push((int)n2[i] - 48);
 	}
-	/*num1.display();
-	cout<<endl;
-	num2.display();*/
 	while(!num1.isEmpty() && !num2.isEmpty()){
 		int add = num1.pop() + num2.pop() + carry;
 		sum.push(add%10);
