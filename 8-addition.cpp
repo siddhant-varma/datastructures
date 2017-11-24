@@ -4,43 +4,49 @@ using namespace std;
 
 template <class T>
 class Stack{
-	int size, pos;
+	int size, tos;
 	T *arr;
-	
-	bool isEmpty(void){
-		return pos == -1;
-	}
-	
-	bool isFull(void){
-		return pos == size-1;
-	}
-	
+		
 	public:
 		Stack(int s){
 			size = s;
 			arr = new T[size];
-			pos = -1;
+			tos = -1;
+		}
+			
+		bool isEmpty(void){
+			return tos == -1;
+		}
+		
+		bool isFull(void){
+			return tos == size-1;
 		}
 		
 		void push(T el){
 			if(!isFull()){
-				arr[++pos] = el;
-			}
+				arr[++tos] = el;
+			}/*
 			else{
 				cout<<"\nStack Overflow...";
-			}
+			}*/
 			return;
 		}
 		
 		T pop(void){
 			if(!isEmpty()){
-				T temp = arr[pos--];
-				cout<<temp<<" popped\n";
+				T temp = arr[tos--];
+				//cout<<temp<<" popped\n";
 				return temp;
 			}
 			else{
 				cout<<"\nStack Underflow...";
 				return -1;
+			}
+		}
+		
+		void display(void){
+			for(int i = tos;i > -1; i--){
+				cout<<arr[i];
 			}
 		}
 		
@@ -53,10 +59,32 @@ int main(void){
 	cout<<"Enter 2nd Number:\t";
 	cin>>n2;
 	Stack <int> num1(n1.length()), num2(n2.length()), sum(n1.length()>=n2.length()?n1.length():n2.length());
+	int carry = 0;
 	for(int  i = 0; i < n1.length(); i++){
-		num1.push((int)n1[i]);
+		num1.push((int)n1[i] - 48);
+		//cout<<"\n\t"<<(int)n1[i] - 48;
 	}
 	for(int  i = 0; i < n2.length(); i++){
-		num2.push((int)n2[i]);
+		num2.push((int)n2[i] - 48);
 	}
+	/*num1.display();
+	cout<<endl;
+	num2.display();*/
+	while(!num1.isEmpty() && !num2.isEmpty()){
+		int add = num1.pop() + num2.pop() + carry;
+		sum.push(add%10);
+		carry = add / 10;
+	}
+	while(!num1.isEmpty()){
+		int add = num1.pop() + carry;
+		sum.push(add%10);
+		carry = add / 10;
+	}
+	while(!num2.isEmpty()){
+		int add = num2.pop() + carry;
+		sum.push(add%10);
+		carry = add / 10;
+	}
+	cout<<"\nSum is:\t";
+	sum.display();
 }
