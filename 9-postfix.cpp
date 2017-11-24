@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 template <class T>
 class Stack{
 	public:
@@ -37,12 +36,6 @@ class Stack{
 				return temp;
 			}
 		}
-		
-		void display(void){
-			for(int i = tos;i > -1; i--){
-				cout<<arr[i];
-			}
-		}
 };
 
 int precedence(char sym){
@@ -51,13 +44,13 @@ int precedence(char sym){
 		case '-':
 			return 1;
 		case '+':
-			return 1;
+			return 2;
 		case '*':
-			return 2;
-		case '/':
-			return 2;
-		case '^':
 			return 3;
+		case '/':
+			return 4;
+		case '^':
+			return 5;
 		default:
 			return 0;
 	}
@@ -71,19 +64,30 @@ int main(void){
 	Stack <char>ops(10);
 	for(int i = 0; i < input.length(); i++){
 		char scan = input[i];
-		cout<<endl<<scan;
+				
+		if(scan == '('){
+			ops.push(scan);
+			continue;
+		}
+		else if(scan == ')'){
+			char c = ops.pop();
+			while(c != '('){
+				if(precedence(c))
+					output += c;
+				c = ops.pop();
+			}
+			continue;
+		}
+		
 		int temp = precedence(scan);
 		if(temp){
 			if(temp > precedence(ops.arr[ops.tos]) || ops.isEmpty()){
 				ops.push(scan);
 			}
 			else{
-				char c;
-				do{
-					c = ops.pop();
-					output += c;
-					cout<<"\t\t\t\t"<<c;
-				}while(temp <= precedence(ops.arr[ops.tos]));
+				while(temp <= precedence(ops.arr[ops.tos])){
+					output += ops.pop();
+				}
 				ops.push(scan);
 			}
 		}
@@ -91,6 +95,7 @@ int main(void){
 			output += scan;
 		}
 	}
+	
 	while(!ops.isEmpty()){
 		output += ops.pop();
 	}
