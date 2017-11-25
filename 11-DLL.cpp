@@ -93,21 +93,14 @@ class DList{
 template<class T>
 void DList<T>::addToHead(T el){
 			Node<T> *newNode = new Node<T>(el);
-			//cout<<"here";
 			if(head){
-				//cout<<"here after if - 0";
-				//head = tail = new Node<T>(el);
 				head = tail = newNode;
-				//cout<<"here after if";
 			}
 			else{
 				head -> prev = newNode;
 				newNode -> next = head;
 				head = newNode;
-				//cout<<"here after else";
 			}
-			//cout<<"here after if else";
-			//return;
 		} 
 
 int main(void){
