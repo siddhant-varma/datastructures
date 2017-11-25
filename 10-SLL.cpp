@@ -98,15 +98,34 @@ class List{
 			for(temp = head; temp!= 0; temp = temp -> next){
 				cout<<temp -> data <<" >> ";
 			}
+			cout<<endl;
 			return;
+		}
+		
+		bool search(T el){
+			Node <T> *temp;
+			for(temp = head; temp != 0; temp = temp -> next){
+				if(temp -> data == el)
+					return true;
+			}
+			return false;
+		}
+		
+		void reverse(void){
+			Node<T> *tempH = head, *i;
+			tail = head = 0;
+			for(i = tempH;i != 0; i = i -> next){
+				addToHead(i -> data);
+			}
 		}
 };
 
 int main(void){
-	List <int> sll
+	List <int> sll;
 	int ch, temp;
 	while(true){	
-		cout<<"Enter:\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete From Head\n\t4.Delete From Tail\n\t5.Display\n\t6.Exit:\t";
+		cout<<"Enter:\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete From Head\n\t4.Delete From Tail\n\t5.Display\n\t";
+		cout<<"6.Reverse\n\t7.Search\n\t8.Exit:\t";
 		cin>>ch;
 		switch(ch){
 			case 1:{
@@ -133,7 +152,22 @@ int main(void){
 				sll.display();
 				break;
 			}
-			case 6:
+			case 6:{
+				sll.reverse();
+				break;
+			}
+			case 7:{
+				cout<<"\nEnter target:\t";
+				cin>>temp;
+				if(sll.search(temp)){
+					cout<<"\n\tElement Found...\n";
+				}
+				else{
+					cout<<"\n\tElement Not Found...\n";
+				}
+				break;
+			}
+			case 8:
 				return 0;
 		}
 	}
