@@ -6,43 +6,32 @@ template<class T>
 class Node{
 	public:
 		T data;
-		Node <T>*next, *prev;
+		Node *next, *prev;
 		Node(){
-			next = prev = nullptr;
+			next = prev = 0;
 		}
-		Node(T el){
+		Node(T el, Node *n = 0, Node *p = 0){
 			data = el;
-			next = prev = nullptr;
+			next = n;
+			prev = p;
 		}
 };
 
 template <class T>
 class DList{
-	Node <T> *head, *tail;
+	Node<T> *head;
+	Node<T> *tail;
 	public:
 		Dlist(){
-			head = tail = nullptr;
+			head = tail = 0;
 		}
 		bool isEmpty(void){
-			return head == nullptr;
+			return head == 0;
 		}
-		void addToHead(T el){
-			Node <T> *newNode = new Node<T>(el);
-			cout<<"here";
-			if(head == nullptr){
-				head = tail = new Node<T>(el);
-			cout<<"here after if";
-			}
-			else{
-				head -> prev = newNode;
-				newNode -> next = head;
-				head = newNode;
-			}
-			return;
-		}
+		void addToHead(T el);
 		void addToTail(T el){
 			Node<T> *newNode = new Node<T>(el);
-			if(head == nullptr){
+			if(head == 0){
 				head = tail = newNode;
 			}
 			else{
@@ -57,11 +46,11 @@ class DList{
 				T el = head -> data;
 				Node<T> *oldNode = head;
 				if(head == tail){
-					head = tail = nullptr;
+					head = tail = 0;
 				}
 				else{
 					head = head -> next;
-					head -> prev = nullptr;
+					head -> prev = 0;
 				}
 				delete oldNode;
 				return el;
@@ -76,11 +65,11 @@ class DList{
 				T el = tail -> data;
 				Node <T> *oldNode = tail;
 				if(head == tail){
-					head = tail = nullptr;
+					head = tail = 0;
 				}
 				else{
 					tail = tail -> prev;
-					tail -> next = nullptr;
+					tail -> next = 0;
 				}
 				delete oldNode;
 				return el;
@@ -93,13 +82,33 @@ class DList{
 		void display(void){
 			Node <T> *temp;
 			cout<<endl;
-			for(temp = head; temp != nullptr; temp = temp -> next)
+			for(temp = head; temp != 0; temp = temp -> next)
 				cout<<temp -> data << " << ";
 			
 			cout<<endl;
 			return;
 		}
 };
+
+template<class T>
+void DList<T>::addToHead(T el){
+			Node<T> *newNode = new Node<T>(el);
+			//cout<<"here";
+			if(head){
+				//cout<<"here after if - 0";
+				//head = tail = new Node<T>(el);
+				head = tail = newNode;
+				//cout<<"here after if";
+			}
+			else{
+				head -> prev = newNode;
+				newNode -> next = head;
+				head = newNode;
+				//cout<<"here after else";
+			}
+			//cout<<"here after if else";
+			//return;
+		} 
 
 int main(void){
 	DList <int> dlst;
