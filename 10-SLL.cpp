@@ -103,16 +103,7 @@ class List{
 };
 
 int main(void){
-	List <int> sll; /*
-	sll.addToHead(5);
-	sll.addToHead(8);
-	sll.addToTail(3);
-	sll.display();
-	sll.addToHead(1);
-	sll.display();
-	sll.delHead();
-	sll.delTail();
-	sll.display();*/
+	List <int> sll
 	int ch, temp;
 	while(true){	
 		cout<<"Enter:\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete From Head\n\t4.Delete From Tail\n\t5.Display\n\t6.Exit:\t";
