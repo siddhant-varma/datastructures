@@ -10,16 +10,16 @@ class Node{
 		Node(){
 			next = prev = nullptr;
 		}
-		Node(T el = 0){
+		Node(T el){
 			data = el;
-			Node();
+			next = prev = nullptr;
 		}
 };
 
 template <class T>
 class DList{
+	Node <T> *head, *tail;
 	public:
-		Node <T> *head, *tail;
 		Dlist(){
 			head = tail = nullptr;
 		}
@@ -28,8 +28,10 @@ class DList{
 		}
 		void addToHead(T el){
 			Node <T> *newNode = new Node<T>(el);
-			if(head == 0){
-				head = tail = newNode;
+			cout<<"here";
+			if(head == nullptr){
+				head = tail = new Node<T>(el);
+			cout<<"here after if";
 			}
 			else{
 				head -> prev = newNode;
@@ -38,9 +40,9 @@ class DList{
 			}
 			return;
 		}
-		void addtoTail(T el){
+		void addToTail(T el){
 			Node<T> *newNode = new Node<T>(el);
-			if(head == 0){
+			if(head == nullptr){
 				head = tail = newNode;
 			}
 			else{
@@ -53,7 +55,7 @@ class DList{
 		T delHead(void){
 			if(!isEmpty()){	
 				T el = head -> data;
-				Node<t> *oldNode = head;
+				Node<T> *oldNode = head;
 				if(head == tail){
 					head = tail = nullptr;
 				}
@@ -100,6 +102,42 @@ class DList{
 };
 
 int main(void){
-	
+	DList <int> dlst;
+	int temp, el;
+	while(true){
+		cout<<"Enter\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete from Head\n\t4.Delete from Tail\n\t8.Exit:\t";
+		cin>>temp;
+		switch(temp){
+			case 1:{
+				cout<<"\nEnter Element:\t";
+				cin>>el;
+				dlst.addToHead(el);
+				break;
+			}
+			case 2:{
+				cout<<"\nEnter Element:\t";
+				cin>>el;
+				dlst.addToTail(el);
+				break;
+			}
+			case 3:{
+				el = dlst.delHead();
+				if(el != -1){
+					cout<<endl<<el<<" dequeued";
+				}
+				break;
+			}
+			case 4:{
+				el = dlst.delTail();
+				if(el != -1){
+					cout<<endl<<el<<" dequeued";
+				}
+				break;
+			}
+			case 5:	dlst.display();
+					break;
+			case 8:	return 0;
+		}
+	}
 	return 0;
 }
