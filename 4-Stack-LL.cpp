@@ -66,6 +66,15 @@ class List{
 			cout<<endl;
 			return;
 		}
+		
+		~List(){
+			/*Node<T> *temp, *del = 0;
+			for(temp = head; temp != 0; temp = temp -> next){
+				del = temp;
+				delete del;
+			}*/
+			tail = head = 0;
+		}
 };
 
 template <class T>
@@ -107,11 +116,16 @@ int main(void){
 			}
 			case 2:stk.pop();
 					break;
+			case 3:{
+				stk.lst.~List();
+				cout<<"\nStack is Cleared...\n";
+				break;
+			}
 			case 4:{
 				if(!stk.isEmpty())
 					stk.lst.display();
 				else
-					cout<<"\nStack underFlow...\n";
+					cout<<"\nStack is Empty...\n";
 				break;
 			}
 			case 5:
