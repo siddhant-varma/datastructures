@@ -67,7 +67,33 @@ class BST{
 					temp = temp->right;
 			}
 			return false;
-			
+		}
+		void preOrder(Node<T> *temp){
+			if(temp == nullptr)
+				return;
+			else{
+				cout<<temp->key<<"\t";
+				preOrder(temp->left);
+				preOrder(temp->right);
+			}
+		}
+		void inOrder(Node<T> *temp){
+			if(temp == nullptr)
+				return;
+			else{
+				inOrder(temp->left);
+				cout<<temp->key<<"\t";
+				inOrder(temp->right);
+			}
+		}
+		void postOrder(Node<T> *temp){
+			if(temp == nullptr)
+				return;
+			else{
+				postOrder(temp->left);
+				postOrder(temp->right);
+				cout<<temp->key<<"\t";
+			}
 		}
 };
 
@@ -75,7 +101,8 @@ int main(void){
 	BST <int>tree;
 	int temp, el;
 	while(true){
-		cout<<"\nEnter:\t1.Insert Element\n\t2.Search\n\t8.Exit:\t";
+		cout<<"\nEnter:\t1.Insert Element\n\t2.Search\n\t3.Pre Order traversal\n\t4.In Order traversal\n\t5.Post Order";
+		cout<<" traversal\n\t6.\n\t7.\n\t8.Exit:\t";
 		cin>>temp;
 		switch(temp){
 			case 1:{
@@ -92,6 +119,9 @@ int main(void){
 				else	cout<<"\nTarget not in Tree...\n";
 				break;
 			}
+			case 3:	tree.preOrder(tree.root);	break;
+			case 4:	tree.inOrder(tree.root);	break;
+			case 5:	tree.postOrder(tree.root);	break;
 			case 8:	return 0;
 		}
 	}
