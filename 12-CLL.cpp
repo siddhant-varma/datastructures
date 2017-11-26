@@ -61,13 +61,13 @@ class CList{
 		}
 		
 		void reverse(void){
-			Node<T> *tempT = tail, *tempH = tail->next, *temp;
+			Node<T> *tempH = tail->next, *temp;
 			tail = 0;
 			bool s = true;
 			for(temp = tempH; temp!=tempH || s; temp = temp->next){
 				addToHead(temp->data);
 				s= false;
-				cout<<"\n\t"<<temp->data<<" added...";
+				//cout<<"\n\t"<<temp->data<<" added...";
 			}
 		}
 };
