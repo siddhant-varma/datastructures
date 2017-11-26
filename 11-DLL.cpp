@@ -8,9 +8,9 @@ class Node{
 		T data;
 		Node *next, *prev;
 		Node(){
-			next = prev = 0;
+			next = prev = nullptr;
 		}
-		Node(T el, Node *n = 0, Node *p = 0){
+		Node(T el, Node *n = nullptr, Node *p = nullptr){
 			data = el;
 			next = n;
 			prev = p;
@@ -22,16 +22,18 @@ class DList{
 	Node<T> *head;
 	Node<T> *tail;
 	public:
-		Dlist(){
-			head = tail = 0;
+		DList(){
+			//cout<<"\nIn Const...";
+			head = tail = nullptr;
+			//cout<<"\n head = tail = "<<head;
 		}
 		bool isEmpty(void){
-			return head == 0;
+			return head == nullptr;
 		}
 		void addToHead(T el);
 		void addToTail(T el){
 			Node<T> *newNode = new Node<T>(el);
-			if(head == 0){
+			if(head == nullptr){
 				head = tail = newNode;
 			}
 			else{
@@ -46,11 +48,11 @@ class DList{
 				T el = head -> data;
 				Node<T> *oldNode = head;
 				if(head == tail){
-					head = tail = 0;
+					head = tail = nullptr;
 				}
 				else{
 					head = head -> next;
-					head -> prev = 0;
+					head -> prev = nullptr;
 				}
 				delete oldNode;
 				return el;
@@ -65,11 +67,11 @@ class DList{
 				T el = tail -> data;
 				Node <T> *oldNode = tail;
 				if(head == tail){
-					head = tail = 0;
+					head = tail = nullptr;
 				}
 				else{
 					tail = tail -> prev;
-					tail -> next = 0;
+					tail -> next = nullptr;
 				}
 				delete oldNode;
 				return el;
@@ -82,18 +84,37 @@ class DList{
 		void display(void){
 			Node <T> *temp;
 			cout<<endl;
-			for(temp = head; temp != 0; temp = temp -> next)
+			for(temp = head; temp != nullptr; temp = temp -> next)
 				cout<<temp -> data << " << ";
 			
 			cout<<endl;
 			return;
+		}
+		bool search(T el){
+			Node<T> *temp;
+			for(temp = head; temp != nullptr; temp = temp -> next){
+				if(temp -> data == el)
+					return true;
+			}
+			return false;
+		}
+		void reverse(void){
+			Node<T> *tempH = head;
+			Node<T> *temp;
+			//cout<<"here";
+			tail = head = nullptr;
+			for(temp = tempH; temp != nullptr; temp = temp -> next){
+				addToHead(temp -> data);
+			}
 		}
 };
 
 template<class T>
 void DList<T>::addToHead(T el){
 			Node<T> *newNode = new Node<T>(el);
-			if(head){
+			//cout<<"\nHere before if";
+			if(head == nullptr){
+				//cout<<"\nHere in in";
 				head = tail = newNode;
 			}
 			else{
@@ -101,13 +122,15 @@ void DList<T>::addToHead(T el){
 				newNode -> next = head;
 				head = newNode;
 			}
+			//cout<<"\nHere in if";
 		} 
 
 int main(void){
 	DList <int> dlst;
 	int temp, el;
 	while(true){
-		cout<<"Enter\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete from Head\n\t4.Delete from Tail\n\t8.Exit:\t";
+		cout<<"Enter\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete from Head\n\t4.Delete from Tail\n\t5.Display";
+		cout<<"\n\t6.Search\n\t7.Reverse\n\t8.Exit:\t";
 		cin>>temp;
 		switch(temp){
 			case 1:{
@@ -137,6 +160,20 @@ int main(void){
 				break;
 			}
 			case 5:	dlst.display();
+					break;
+			case 6:{
+				cout<<"\nEmter Target:\t";
+				cin>>el;
+				bool found = dlst.search(el);
+				if(found){
+					cout<<"\nElement Found...\n";
+				}
+				else{
+					cout<<"\nElement Not Found...\n";
+				}
+				break;
+			}
+			case 7:	dlst.reverse();
 					break;
 			case 8:	return 0;
 		}
