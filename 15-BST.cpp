@@ -112,14 +112,67 @@ class BST{
 				}
 			}
 		}
+		void delCopy(T el){
+			Node<T> *node = root, *prev, *del, *tree;
+			while(node != nullptr){
+				//prev = node;
+				if(node->key == el)
+					break;
+				else if(el < node->key)
+					node = node->left;
+				else	node = node->right;
+			}
+			cout<<"\nTarget node found\t"<<node->key;
+			tree = node;
+			if(node->left == nullptr){
+				node = node->right;
+				cout<<"\nNo left child of node...";
+			}
+			else if(node->right == nullptr){
+				node = node->left;
+				cout<<"\nNo right child of node...Node is "<<node->key;
+			}
+			else{
+				tree = node->left;
+				prev  = node;
+				while(tree->right != nullptr){
+					prev = tree;
+					tree = tree->right;
+				}
+				cout<<"\nPrevious node found\t"<<prev->key;
+				node->key = tree->key;
+				if(prev == node)
+					prev->left = tree->left;
+				else	prev->right = tree->left;
+			}
+			delete tree;
+			cout<<"\nfine";
+			return;
+		}
 };
 
 int main(void){
 	BST <int>tree;
 	int temp, el;
+	
+	tree.insert(10);
+	tree.insert(15);
+	tree.insert(5);
+	tree.insert(2);
+	tree.insert(7);
+	tree.insert(1);
+	tree.insert(4);
+	tree.insert(3);
+			cout<<"\n";
+	tree.inOrder(tree.root);
+	tree.delCopy(3);
+			cout<<"\n";
+	tree.inOrder(tree.root);
+	
+	/*
 	while(true){
 		cout<<"\nEnter:\t1.Insert Element\n\t2.Search\n\t3.Pre Order traversal\n\t4.In Order traversal\n\t5.Post Order";
-		cout<<" traversal\n\t6.Breadth First Traversal\n\t7.\n\t8.Exit:\t";
+		cout<<" traversal\n\t6.Breadth First Traversal\n\t7.Delete by Copying\n\t8.Exit:\t";
 		cin>>temp;
 		switch(temp){
 			case 1:{
@@ -140,7 +193,14 @@ int main(void){
 			case 4:	tree.inOrder(tree.root);	break;
 			case 5:	tree.postOrder(tree.root);	break;
 			case 6:	tree.level(tree.root);	break;
+			case 7:{
+				cout<<"\nEnter Element to be deleted:\t";
+				cin>>el;
+				tree.delCopy(el);
+				break;
+			}
 			case 8:	return 0;
 		}
-	}
+	}*/
+	return 0;
 }
