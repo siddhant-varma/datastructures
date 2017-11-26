@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <queue>
 using namespace std;
 
 template <class T>
@@ -95,6 +95,23 @@ class BST{
 				cout<<temp->key<<"\t";
 			}
 		}
+		void level(Node<T> *temp){
+			if(temp == nullptr)
+				return;
+			else{
+				queue<Node<T>*> q;
+				q.push(temp);
+				while(! q.empty()){
+					Node<T> *node = q.front();
+					q.pop();
+					cout<<node->key<<"\t";
+					if(node->left != nullptr)
+						q.push(node->left);
+					if(node->right != nullptr)
+						q.push(node->right);
+				}
+			}
+		}
 };
 
 int main(void){
@@ -102,7 +119,7 @@ int main(void){
 	int temp, el;
 	while(true){
 		cout<<"\nEnter:\t1.Insert Element\n\t2.Search\n\t3.Pre Order traversal\n\t4.In Order traversal\n\t5.Post Order";
-		cout<<" traversal\n\t6.\n\t7.\n\t8.Exit:\t";
+		cout<<" traversal\n\t6.Breadth First Traversal\n\t7.\n\t8.Exit:\t";
 		cin>>temp;
 		switch(temp){
 			case 1:{
@@ -122,6 +139,7 @@ int main(void){
 			case 3:	tree.preOrder(tree.root);	break;
 			case 4:	tree.inOrder(tree.root);	break;
 			case 5:	tree.postOrder(tree.root);	break;
+			case 6:	tree.level(tree.root);	break;
 			case 8:	return 0;
 		}
 	}
