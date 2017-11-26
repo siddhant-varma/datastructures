@@ -49,19 +49,47 @@ class BST{
 				}
 			}
 		}
+		bool search(Node<T> *temp, T target){
+			/*if(temp->key == target){
+				return true;
+			}
+			else if(temp->key < target){
+				return search(temp->right, target);				
+			}
+			else if(temp->key > target)	return search(temp->left, target);
+			else	return false; 	*/
+			while(temp != nullptr){
+				if(temp->key == target)
+					return true;
+				else if(target < temp->key)
+					temp = temp->left;
+				else
+					temp = temp->right;
+			}
+			return false;
+			
+		}
 };
 
 int main(void){
 	BST <int>tree;
 	int temp, el;
 	while(true){
-		cout<<"\nEnter:\t1.Insert Element\n\t8.Exit:\t";
+		cout<<"\nEnter:\t1.Insert Element\n\t2.Search\n\t8.Exit:\t";
 		cin>>temp;
 		switch(temp){
 			case 1:{
 				cout<<"\nEnter Element:\t";
 				cin>>el;
 				tree.insert(el);
+				break;
+			}
+			case 2:{
+				cout<<"\nEnter Target:\t";
+				cin>>el;
+				if(tree.search(tree.root, el))
+					cout<<"\nTarget in Tree.\n";
+				else	cout<<"\nTarget not in Tree...\n";
 				break;
 			}
 			case 8:	return 0;
