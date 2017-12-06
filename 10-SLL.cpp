@@ -125,15 +125,10 @@ class List{
 template<class T> void List<T>::sort(void){
 	Node<T> *temp = head, *tempI;
 	for(temp = head; temp->next != nullptr; temp = temp->next){
-		//cout<<"\ntemp = "<<temp->data;
 		for(tempI = temp->next; tempI != nullptr; tempI = tempI->next){
-			//cout<<"\ntempI = "<<tempI->data;
 			if(tempI->data < temp->data){
-				//cout<<"\n\tSwapping "<< temp->data << "\t" << tempI->data;
 				swap(temp->data, tempI->data);
 			}
-			/*cout<<endl;
-			display();*/
 		}
 	}
 }
@@ -142,14 +137,6 @@ template<class T> void List<T>::sort(void){
 int main(void){
 	List <int> sll;
 	int ch, temp;
-	sll.addToHead(5);
-	sll.addToHead(59);
-	sll.addToTail(2);
-	sll.addToHead(9);
-	sll.display();
-	sll.sort();
-	sll.display();
-	/*
 	while(true){	
 		cout<<"Enter:\t1.Add to Head\n\t2.Add to Tail\n\t3.Delete From Head\n\t4.Delete From Tail\n\t5.Display\n\t";
 		cout<<"6.Reverse\n\t7.Search\n\t8.Sort\n\t9.Exit:\t";
@@ -201,6 +188,6 @@ int main(void){
 			case 9:
 				return 0;
 		}
-	}*/
+	}
 	return 0;
 }
