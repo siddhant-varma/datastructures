@@ -32,6 +32,7 @@ class OLL{
 			cout<<endl;
 			return;
 		}
+		void del(T el);
 };
 
 template<class T> void OLL<T>::insert(T el){
@@ -58,6 +59,31 @@ template<class T> void OLL<T>::insert(T el){
 	}
 }
 
+template<class T> void OLL<T>::del(T el){
+	if(head == nullptr){
+		return;
+	}
+	else if(head == tail){
+		head = tail = nullptr;
+	}
+	else{
+		Node<T> *temp, *prev = head;
+		for(temp = head ; temp != nullptr; temp = temp->next){
+			if(el == temp->data)
+				break;
+			else{
+				prev = temp;
+			}
+		}
+		if(head->data == el){
+			head = head->next;
+		}
+		prev->next = temp->next;
+		delete temp;
+	}
+}
+
+
 int main(void){
 	OLL<int> olst;
 	olst.insert(5);
@@ -68,8 +94,11 @@ int main(void){
 	olst.insert(47);
 	olst.insert(10);
 	olst.insert(1);
-	
 	olst.display();
+	olst.del(7);
+	olst.del(1);
+	olst.display();
+	
 	
 	return 0;
 }
